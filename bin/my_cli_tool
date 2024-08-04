@@ -27,7 +27,16 @@ OptionParser.new do |opts|
     exit
   end
 
+  opts.on("-c", "--count", "Count the number of unique greeted names") do
+    puts "Number of unique greeted names: #{MyCliTool::Greeter.count_names}"
+    exit
+  end
+
 end.parse!
 
-name = options[:name] || "World"
-puts MyCliTool.greet(name)
+if options[:name]
+  name = options[:name]
+  puts MyCliTool.greet(name)
+else
+  puts "No name provided. Use -n or --name to provide a name."
+end

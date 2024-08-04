@@ -7,14 +7,22 @@ module MyCliTool
     end
 
     def greet
-      save_name(@name)
-      "Hello, #{@name}!"
+      if save_name(@name)
+        "Hello, #{@name}!"
+      else
+        "Hello again, #{@name}!"
+      end
     end
 
     def save_name(name)
+
+      existing_names = self.class.load_names
+      return false if existing_names.include?(name)
+
       File.open(FILE_PATH, 'a') do |file|
         file.puts(name)
       end
+      true
     end
 
     def self.load_names
@@ -35,6 +43,10 @@ module MyCliTool
       else
         return "Name not found: #{name}"
       end
+    end
+
+    def self.count_names
+      load_names.uniq.count
     end
     
   end
