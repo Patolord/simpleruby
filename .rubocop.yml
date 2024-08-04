@@ -213,3 +213,14 @@ Style/SwapValues:
   Enabled: true
 Style/YAMLFileRead:
   Enabled: true
+
+Lint/ShadowingOuterLocalVariable:
+  Exclude:
+    - "lib/my_cli_tool/greeter.rb"
+
+Style/Documentation:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+    - "lib/my_cli_tool.rb"
+    - "lib/my_cli_tool/greeter.rb"
