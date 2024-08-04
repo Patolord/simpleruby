@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Greeter Class provides greeting functionality
 module MyCliTool
   class Greeter
     FILE_PATH = 'names.txt'
@@ -15,7 +18,6 @@ module MyCliTool
     end
 
     def save_name(name)
-
       existing_names = self.class.load_names
       return false if existing_names.include?(name)
 
@@ -33,21 +35,18 @@ module MyCliTool
 
     def self.remove_name(name)
       names = load_names
-      if names.delete(name)
+      return "Name not found: #{name}" unless names.delete(name)
+
       File.open(FILE_PATH, 'w') do |file|
         names.each do |name|
           file.puts(name)
         end
       end
-        return "Name removed: #{name}"
-      else
-        return "Name not found: #{name}"
-      end
+      "Name removed: #{name}"
     end
 
     def self.count_names
       load_names.uniq.count
     end
-    
   end
 end

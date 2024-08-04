@@ -1,42 +1,43 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'optparse'
 require_relative '../lib/my_cli_tool'
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: my_cli_tool [options]"
+  opts.banner = 'Usage: my_cli_tool [options]'
 
-  opts.on("-nNAME", "--name=NAME", "Name to greet") do |name|
+  opts.on('-nNAME', '--name=NAME', 'Name to greet') do |name|
     options[:name] = name
   end
 
-  opts.on("-v", "--version", "Show version") do
+  opts.on('-v', '--version', 'Show version') do
     puts "MyCliTool version #{MyCliTool::VERSION}"
     exit
   end
 
-  opts.on("-l", "--list", "List all greeted names") do
-    puts "Greeted names:"
+  opts.on('-l', '--list', 'List all greeted names') do
+    puts 'Greeted names:'
     puts MyCliTool::Greeter.load_names
     exit
   end
 
-  opts.on("-rNAME", "--remove=NAME", "Remove specific name") do |name|
+  opts.on('-rNAME', '--remove=NAME', 'Remove specific name') do |name|
     message = MyCliTool::Greeter.remove_name(name)
     puts message
     exit
   end
 
-  opts.on("-c", "--count", "Count the number of unique greeted names") do
+  opts.on('-c', '--count', 'Count the number of unique greeted names') do
     puts "Number of unique greeted names: #{MyCliTool::Greeter.count_names}"
     exit
   end
-
 end.parse!
 
 if options[:name]
   name = options[:name]
   puts MyCliTool.greet(name)
 else
-  puts "No name provided. Use -n or --name to provide a name."
+  puts 'No name provided. Use -n or --name to provide a name.'
 end

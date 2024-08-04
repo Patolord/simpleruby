@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'my_cli_tool/version'
 require_relative 'my_cli_tool/greeter'
 
