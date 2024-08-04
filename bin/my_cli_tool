@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require_relative '../lib/my_cli_tool'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: my_cli_tool [options]"
+
+  opts.on("-nNAME", "--name=NAME", "Name to greet") do |name|
+    options[:name] = name
+  end
+
+  opts.on("-v", "--version", "Show version") do
+    puts "MyCliTool version #{MyCliTool::VERSION}"
+    exit
+  end
+
+  opts.on("-l", "--list", "List all greeted names") do
+    puts "Greeted names:"
+    puts MyCliTool::Greeter.load_names
+    exit
+  end
+end.parse!
+
+name = options[:name] || "World"
+puts MyCliTool.greet(name)
