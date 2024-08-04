@@ -20,6 +20,13 @@ OptionParser.new do |opts|
     puts MyCliTool::Greeter.load_names
     exit
   end
+
+  opts.on("-rNAME", "--remove=NAME", "Remove specific name") do |name|
+    message = MyCliTool::Greeter.remove_name(name)
+    puts message
+    exit
+  end
+
 end.parse!
 
 name = options[:name] || "World"

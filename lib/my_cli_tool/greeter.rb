@@ -22,5 +22,20 @@ module MyCliTool
 
       File.read(FILE_PATH).split("\n")
     end
+
+    def self.remove_name(name)
+      names = load_names
+      if names.delete(name)
+      File.open(FILE_PATH, 'w') do |file|
+        names.each do |name|
+          file.puts(name)
+        end
+      end
+        return "Name removed: #{name}"
+      else
+        return "Name not found: #{name}"
+      end
+    end
+    
   end
 end
